@@ -5,6 +5,8 @@ import sqlite3
 import time
 import pygame
 imageDuration = 5
+max_width = 1920
+max_height = 1080
 # dbPath =  '/Users/darren/projects/photo_frame/photo-indexer/database/database.sqlite'
 # photoPath = '/Users/darren/projects/photo_frame/photo-indexer/storage/photos/'
 dbPath =  '/home/pi/photo-indexer/database/database.sqlite'
@@ -17,6 +19,14 @@ def send_image_to_hdmi(filename):
     size = image.get_rect()
     width = size[2]
     height = size[3]
+    if width > max_width:
+         height = height * (Decimal(max_width)/Decimal(width))
+         width = max_width
+         image = pygame.transform.scale(image,(width,height))
+  if height > max_height:
+         width = width * (Decimal(max_height)/Decimal(height))
+         height = max_height
+         image = pygame.transform.scale(image,(width,height))
     windowSurfaceObj = pygame.display.set_mode((width,height),pygame.FULLSCREEN)
     windowSurfaceObj.blit(image,(0,0))
     pygame.display.update()
