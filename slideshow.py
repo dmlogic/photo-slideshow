@@ -6,7 +6,7 @@ import time
 import pygame
 from decimal import *
 
-imageDuration = 5
+imageDuration = 10
 max_width = 1920
 max_height = 1080
 # dbPath =  '/Users/darren/projects/photo_frame/photo-indexer/database/database.sqlite'
@@ -31,6 +31,7 @@ def send_image_to_hdmi(filename):
          image = pygame.transform.scale(image,(width,height))
     windowSurfaceObj = pygame.display.set_mode((width,height),pygame.FULLSCREEN)
     windowSurfaceObj.blit(image,(0,0))
+    pygame.mouse.set_visible()
     pygame.display.update()
 
 def get_image():
