@@ -4,6 +4,8 @@ import os.path
 import sqlite3
 import time
 import pygame
+from decimal import *
+
 imageDuration = 5
 max_width = 1920
 max_height = 1080
@@ -23,7 +25,7 @@ def send_image_to_hdmi(filename):
          height = height * (Decimal(max_width)/Decimal(width))
          width = max_width
          image = pygame.transform.scale(image,(width,height))
-  if height > max_height:
+    if height > max_height:
          width = width * (Decimal(max_height)/Decimal(height))
          height = max_height
          image = pygame.transform.scale(image,(width,height))
