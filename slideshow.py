@@ -12,8 +12,8 @@ photoPath = '/home/pi/storage/photos/'
 database = sqlite3.connect(dbPath)
 
 def send_image_to_hdmi(filename):
-    # print( nextImage )
-    image = pygame.image.load(imagefile)
+    # print( filename )
+    image = pygame.image.load(filename)
     size = image.get_rect()
     width = size[2]
     height = size[3]
