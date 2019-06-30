@@ -16,9 +16,13 @@ photoPath = '/home/pi/storage/photos/'
 database = sqlite3.connect(dbPath)
 
 def send_image_to_hdmi(filename):
-    # print( filename )
-    image = pygame.image.load(filename)
-    size = image.get_rect()
+    try:
+        image = pygame.image.load(filename)
+        size = image.get_rect()
+    except:
+        print( "Bad image")
+        print( filename)
+        quit()
     width = size[2]
     height = size[3]
     if width > max_width:
