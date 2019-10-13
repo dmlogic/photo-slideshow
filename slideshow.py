@@ -19,24 +19,24 @@ def send_image_to_hdmi(filename):
     try:
         image = pygame.image.load(filename)
         size = image.get_rect()
+        width = size[2]
+        height = size[3]
+        if width > max_width:
+             height = height * (Decimal(max_width)/Decimal(width))
+             width = max_width
+             image = pygame.transform.scale(image,(width,height))
+        if height > max_height:
+             width = width * (Decimal(max_height)/Decimal(height))
+             height = max_height
+             image = pygame.transform.scale(image,(width,height))
+        windowSurfaceObj = pygame.display.set_mode((width,height),pygame.FULLSCREEN)
+        windowSurfaceObj.blit(image,(0,0))
+        pygame.mouse.set_visible(0)
+        pygame.display.update()
     except:
         print( "Bad image")
         print( filename)
         quit()
-    width = size[2]
-    height = size[3]
-    if width > max_width:
-         height = height * (Decimal(max_width)/Decimal(width))
-         width = max_width
-         image = pygame.transform.scale(image,(width,height))
-    if height > max_height:
-         width = width * (Decimal(max_height)/Decimal(height))
-         height = max_height
-         image = pygame.transform.scale(image,(width,height))
-    windowSurfaceObj = pygame.display.set_mode((width,height),pygame.FULLSCREEN)
-    windowSurfaceObj.blit(image,(0,0))
-    pygame.mouse.set_visible(0)
-    pygame.display.update()
 
 def get_image():
     query = database.cursor()
