@@ -77,7 +77,7 @@ class Display:
 
     def render_date(self, rawDate ):
         created_date = datetime.strptime(rawDate, '%Y-%m-%d %H:%M:%S')
-        text = created_date.strftime("%A, %d %B %Y %I:%M")
+        text = created_date.strftime("%A, %d %B %Y")
 
         shadow = self.date_font.render(text, True, black)
         shadow_rect = shadow.get_rect()
