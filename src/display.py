@@ -9,12 +9,14 @@ class Display:
     max_width: None
     max_height: None
     canvas: None
+    font_path: None
     title_font: None
     date_font: None
 
-    def __init__(self, width, height):
+    def __init__(self, width, height, font_path):
         self.max_width = width
         self.max_height = height
+        self.font_path = font_path
         self.init_pygame()
 
     def init_pygame(self):
@@ -22,8 +24,8 @@ class Display:
         pygame.mouse.set_visible(0)
         self.canvas = pygame.display.set_mode(
             (self.max_width, self.max_height), pygame.FULLSCREEN)
-        self.title_font = pygame.font.Font('fonts/OpenSans-SemiBold.ttf', 36)
-        self.date_font = pygame.font.Font('fonts/OpenSans-SemiBoldItalic.ttf', 24)
+        self.title_font = pygame.font.Font(self.font_path+'OpenSans-SemiBold.ttf', 36)
+        self.date_font = pygame.font.Font(self.font_path+'OpenSans-SemiBoldItalic.ttf', 24)
 
     def send_to_hdmi(self, imageData):
         image = self.load_image(imageData['path'])

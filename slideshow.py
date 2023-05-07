@@ -8,7 +8,7 @@ from src import lookup
 from src import display
 
 image_lookup = lookup.Lookup(cfg.db_path, cfg.photo_path)
-image_display = display.Display(cfg.max_width, cfg.max_height)
+image_display = display.Display(cfg.max_width, cfg.max_height, os.path.dirname(os.path.realpath(__file__))+'/fonts/')
 
 
 def display_image():
@@ -18,7 +18,6 @@ def display_image():
         time.sleep(cfg.image_duration)
     else:
         display_image()
-
 
 try:
     while True:
