@@ -7,20 +7,21 @@ import config as cfg
 from src import lookup
 from src import display
 
-imageLookup = lookup.Lookup(cfg.dbPath, cfg.photoPath)
-imageDisplay = display.Display(cfg.max_width, cfg.max_height)
+image_lookup = lookup.Lookup(cfg.db_path, cfg.photo_path)
+image_display = display.Display(cfg.max_width, cfg.max_height)
+
 
 def display_image():
-    nextImage = imageLookup.random_image()
-    if os.path.isfile(nextImage['path']) :
-        imageDisplay.send_to_hdmi(nextImage)
-        time.sleep(cfg.imageDuration)
+    next_image = image_lookup.random_image()
+    if os.path.isfile(next_image['path']):
+        image_display.send_to_hdmi(next_image)
+        time.sleep(cfg.image_duration)
     else:
         display_image()
+
 
 try:
     while True:
         display_image()
 except KeyboardInterrupt:
     print('Finished!')
-
