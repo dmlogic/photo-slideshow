@@ -13,10 +13,13 @@ image_display = display.Display(cfg.max_width, cfg.max_height, os.path.dirname(o
 
 def display_image():
     next_image = image_lookup.random_image()
-    if os.path.isfile(next_image['path']):
-        image_display.send_to_hdmi(next_image)
-        time.sleep(cfg.image_duration)
-    else:
+    try:
+        if os.path.isfile(next_image['path']):
+            image_display.send_to_hdmi(next_image)
+            time.sleep(cfg.image_duration)
+        else:
+            display_image()
+    except:
         display_image()
 
 try:
