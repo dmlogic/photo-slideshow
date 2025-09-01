@@ -13,9 +13,7 @@ class Display:
     title_font: None
     date_font: None
 
-    def __init__(self, width, height, font_path):
-        self.max_width = width
-        self.max_height = height
+    def __init__(self, font_path):
         self.font_path = font_path
         self.init_pygame()
 
@@ -29,7 +27,6 @@ class Display:
 
     def send_to_hdmi(self, imageData):
         image = self.load_image(imageData['path'])
-        image = self.resize_image(image)
         self.render_image(image)
         self.render_title(imageData['title'])
         self.render_date(imageData['date'])
@@ -44,20 +41,6 @@ class Display:
             print("Bad image")
             print(image_path)
             quit()
-
-    def resize_image(self, image):
-        size = image.get_rect()
-        width = size[2]
-        height = size[3]
-        if width > self.max_width:
-            height = height * (Decimal(self.max_width)/Decimal(width))
-            width = self.max_width
-            image = pygame.transform.scale(image, (width, height))
-        if height > self.max_height:
-            width = width * (Decimal(self.max_height)/Decimal(height))
-            height = self.max_height
-            image = pygame.transform.scale(image, (width, height))
-        return image
 
     def render_image(self, image):
         self.canvas.blit(image, (0, 0))
